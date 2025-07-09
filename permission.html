@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Permission Granted</title>
+  <style>
+    body {
+      background-color: white;
+      color: green;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .tick {
+      font-size: 100px;
+    }
+    .message {
+      font-size: 30px;
+      margin-top: 20px;
+    }
+    .time {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function showTime() {
+      const now = new Date();
+      const timeString = now.toLocaleString();
+      document.getElementById("time").innerText = "Time: " + timeString;
+    }
+
+    // Auto-redirect after 3 seconds
+    setTimeout(function () {
+      window.location.href = "TYPE.html"; // Redirects back to QR screen
+    }, 3000);
+  </script>
+</head>
+<body onload="showTime()">
+  <div class="tick">✅</div>
+  <div class="message">Permission Granted</div>
+  <div class="tim
