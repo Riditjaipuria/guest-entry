@@ -25,21 +25,21 @@
   <script>
     function showTime() {
       const now = new Date();
-      const timeString = now.toLocaleString();
+      const timeString = now.toLocaleString(); // shows both date & time
       document.getElementById("time").innerText = "Time: " + timeString;
     }
 
-    // Auto-redirect after 3 seconds
+    // Redirect to p.html after 3 seconds
     setTimeout(function () {
-      window.location.href = "TYPE.html"; // Redirects back to QR screen
+      window.location.href = "p.html";
     }, 3000);
   </script>
 </head>
 <body onload="showTime()">
   <div class="tick">✅</div>
   <div class="message">Permission Granted</div>
-  <div class="time">Time:</div>
+  <div class="time" id="time">Time:</div>
   <div class="message">Welcome to Founder’s Day</div>
-  window.location.href = "TYPE.html";
 </body>
 </html>
+
