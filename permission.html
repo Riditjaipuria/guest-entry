@@ -1,45 +1,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Permission Granted</title>
+  <title>Founder’s Day Entry</title>
   <style>
     body {
-      background-color: white;
-      color: green;
       font-family: Arial, sans-serif;
+      background-color: #f0fff0;
       text-align: center;
-      padding-top: 50px;
+      margin: 0;
+      padding: 20px;
+    }
+    .screen {
+      display: none;
+    }
+    .active {
+      display: block;
     }
     .tick {
       font-size: 100px;
+      color: green;
     }
     .message {
       font-size: 30px;
       margin-top: 20px;
+      color: green;
     }
     .time {
-      font-size: 24px;
+      font-size: 22px;
       margin-top: 10px;
     }
+    #video, #canvas {
+      border: 4px solid #4CAF50;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+    #captureBtn {
+      margin-top: 20px;
+      font-size: 20px;
+      padding: 12px;
+      border-radius: 50%;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
   </style>
+</head>
+<body onload="showPermission()">
+
+  <!-- ✅ PERMISSION GRANTED SCREEN -->
+  <div id="permissionScreen" class="screen active">
+    <div class="tick">✅</div>
+    <div class="message">Permission Granted</div>
+    <div class="time" id="time">Time: </div>
+    <div class="message">Welcome to Founder’s Day</div>
+  </div>
+
+  <!-- 📸 PHOTO CAPTURE SCREEN -->
+  <div id="photoScreen" class="screen">
+    <h2 style="font-size:26px; font-weight:bold;">Please stand in the middle</h2>
+    <video id="video" width="320" height="240" autoplay></video>
+    <br>
+    <button id="captureBtn">📸</button>
+    <br>
+    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+  </div>
+
   <script>
-    function showTime() {
+    function showPermission() {
       const now = new Date();
-      const timeString = now.toLocaleString(); // shows both date & time
-      document.getElementById("time").innerText = "Time: " + timeString;
+      document.getElementById("time").innerText = "Time: " + now.toLocaleString();
+
+      // Show permission screen for 3 sec
+      setTimeout(() => {
+        document.getElementById("permissionScreen").classList.remove("active");
+        document.getElementById("photoScreen").classList.add("active");
+        startCamera();
+        autoClosePhotoScreen();
+      }, 3000);
     }
 
-    // Redirect to .html after 3 seconds
-    setTimeout(function () {
-      window.location.href = ".html";
-    }, 3000);
+    function startCamera() {
+      const video = document.getElementById('video');
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        });
+    }
+
+    document.getElementById("captureBtn").onclick = function () {
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      const context = canvas.getContext("2d");
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.style.display = "block";
+
+      // Add code here to upload or save photo to server / Google Sheets if needed
+    };
+
+    function autoClosePhotoScreen() {
+      setTimeout(() => {
+        document.getElementById("photoScreen").classList.remove("active");
+        document.getElementById("permissionScreen").classList.add("active");
+        showPermission(); // restart cycle
+      }, 10000);
+    }
   </script>
-</head>
-<body onload="showTime()">
-  <div class="tick">✅</div>
-  <div class="message">Permission Granted</div>
-  <div class="time" id="time">Time:</div>
-  <div class="message">Welcome to Founder’s Day</div>
 </body>
 </html>
+
 
