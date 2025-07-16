@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Guest Entry System</title>
+  <title>Guest Entry - Founder's Day</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f0fff0;
-      text-align: center;
       margin: 0;
-      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e9f5e9, #cceacc);
+      color: #054d12;
+      text-align: center;
     }
     .screen {
       display: none;
+      padding: 40px;
     }
     .active {
       display: block;
     }
     .qr-section img {
       width: 300px;
-      margin: 20px;
+      border: 8px solid #28a745;
+      border-radius: 25px;
     }
     .tick {
-      font-size: 100px;
-      color: green;
+      font-size: 120px;
+      color: #28a745;
     }
     .message {
-      font-size: 30px;
-      margin-top: 10px;
-      color: green;
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 15px;
     }
     .time {
       font-size: 22px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
     #video, #canvas {
-      border: 5px solid #28a745;
-      border-radius: 15px;
-      margin-top: 15px;
+      border: 6px solid #28a745;
+      border-radius: 18px;
+      margin-top: 20px;
     }
     #captureBtn {
       margin-top: 15px;
-      font-size: 20px;
-      padding: 12px;
+      font-size: 24px;
+      padding: 15px;
       border-radius: 50%;
       border: none;
       background-color: #28a745;
@@ -52,15 +54,17 @@
 </head>
 <body>
 
-<!-- 🎯 QR Screen -->
+<!-- QR Display -->
 <div id="startScreen" class="screen active">
-  <h1>Welcome Guest</h1>
-  <p>Scan this QR Code:</p>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://riditjaipuria.github.io/guest-entry/&size=300x300" alt="QR Code">
-  <p style="font-size:18px;">Waiting for scan...</p>
+  <h1 style="font-size: 38px; font-weight: bold;">Welcome Guest</h1>
+  <p style="font-size: 22px;">Scan this QR Code below:</p>
+  <div class="qr-section">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://riditjaipuria.github.io/guest-entry/&size=300x300" alt="QR Code">
+  </div>
+  <p style="font-size: 20px; margin-top: 20px;">Waiting for scan...</p>
 </div>
 
-<!-- ✅ Permission Granted -->
+<!-- Permission Granted -->
 <div id="permissionScreen" class="screen">
   <div class="tick">✅</div>
   <div class="message">Permission Granted</div>
@@ -68,7 +72,7 @@
   <div class="message">Welcome to Founder’s Day</div>
 </div>
 
-<!-- 📸 Photo Capture -->
+<!-- Photo Capture -->
 <div id="photoScreen" class="screen">
   <h2 style="font-size:26px; font-weight:bold;">Please stand in the middle</h2>
   <video id="video" width="320" height="240" autoplay></video><br>
@@ -81,7 +85,7 @@
   const permissionScreen = document.getElementById('permissionScreen');
   const photoScreen = document.getElementById('photoScreen');
 
-  // 👇 Simulate QR Scan detection after 5 sec (for demo purpose)
+  // DEMO ONLY: Simulate QR scan after 5 seconds
   setTimeout(() => {
     showPermissionGranted();
   }, 5000);
@@ -127,4 +131,3 @@
 
 </body>
 </html>
-
